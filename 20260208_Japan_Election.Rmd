@@ -1,0 +1,83 @@
+---
+title: "2026年 衆議院議員選挙結果の分析"
+author: "Matt Sakamaki - msakama2@jh.edu"
+header-includes:
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhead[R]{Matt Sakamaki}
+  - \usepackage{csquotes}
+output:
+  pdf_document:
+    latex_engine: xelatex
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+df<-read.csv("partybalot.csv")
+df
+str(df)
+```
+
+# 1
+
+> 自民党得票率(小選挙区)と獲得議席数の関係
+
+```{r}
+df <- df %>%
+  mutate(
+    balot_jimin = as.numeric(as.character(balot_jimin)),
+    n_voter     = as.numeric(as.character(n_voter))
+  ) %>%
+  mutate(
+    p_jimin = balot_jimin / n_balot,
+    p_seat_jimin = seat_jimin / seat_total
+  )
+
+plot1 <- ggplot(
+  df,
+  aes(
+    x=p_seat_jimin,
+    y=p_jimin,
+    label=year
+  )
+)+
+geom_point(size = 3) +
+geom_smooth(
+  method = "lm",
+  se = FALSE,
+  linewidth = 0.7,
+  fullrange = TRUE
+) +
+geom_text(
+  vjust = -1,
+  size = 3
+) +
+  
+scale_x_continuous(
+    limits = c(0, 1),
+    labels = scales::percent
+) +
+scale_y_continuous(
+    limits = c(0, 1),
+    labels = scales::percent
+) +
+  
+labs(
+  title = "衆院選 自民党得票率(小選挙区)と議席獲得率の関係",
+  x = "自民党 議席獲得率（小選挙区）",
+  y = "自民党 得票率 (得票数/投票数)",
+  caption = "※ データ点が少ないため回帰は参考程度(外挿)"
+) +
+theme_minimal(base_size = 12)
+
+plot1
+```
+
+# 2.
+
+> 
+
