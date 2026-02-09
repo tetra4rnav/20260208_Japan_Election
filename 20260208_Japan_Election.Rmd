@@ -1,22 +1,39 @@
 ---
 title: "2026年 衆議院議員選挙結果の分析"
 author: "Matt Sakamaki - msakama2@jh.edu"
-header-includes:
-  - \usepackage{fancyhdr}
-  - \pagestyle{fancy}
-  - \fancyhead[R]{Matt Sakamaki}
-  - \usepackage{csquotes}
+
 output:
   pdf_document:
-    latex_engine: xelatex
-editor_options: 
-  markdown: 
+    latex_engine: lualatex
+    keep_tex: true
+
+header-includes:
+  - \usepackage{luatexja}
+  - \usepackage{luatexja-fontspec}
+  - \setmainfont{Times New Roman}
+  - \setmainjfont{Yu Mincho}
+
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyhead[R]{Matt Sakamaki}
+  - \renewcommand{\headrulewidth}{0.4pt}
+  - \AtBeginDocument{\thispagestyle{fancy}}
+
+editor_options:
+  markdown:
     wrap: sentence
 ---
 
 ```{r}
+library(showtext)
+library(sysfonts)
+
 library(tidyverse)
 library(dplyr)
+
+showtext_auto()
+
 df<-read.csv("partybalot.csv")
 df
 str(df)
@@ -79,5 +96,53 @@ plot1
 
 # 2.
 
-> 
+> 投票率(全体)と在外投票率との関係
+
+```{r}
+df <- df %>%
+  mutate(
+    p_vote_precise = n_balot / n_voter,
+    p_osvote_precise = n_osbalot / n_osvoters
+  )
+
+plot2 <- ggplot(
+  df,
+  aes(
+    x=p_vote_precise,
+    y=p_osvote_precise,
+    label=year
+  )
+)+
+
+geom_point(size = 3) +
+geom_smooth(
+  method = "lm",
+  se = FALSE,
+  linewidth = 0.7,
+  fullrange = TRUE
+) +
+geom_text(
+  vjust = -1,
+  size = 3
+) +
+
+labs(
+  title = "衆院選 投票率(小選挙区・全体)と在外投票率との関係",
+  x = "投票率",
+  y = "在外投票率",
+  caption = "※ データ点が少ないため回帰は参考程度(外挿)"
+) +
+theme_minimal(base_size = 12)
+
+plot2
+```
+## 検定
+
+```{r}
+#pearson
+cor.test(df$p_vote_precise, df$p_osvote_precise, method = "pearson")
+
+#spearman
+cor.test(df$p_vote_precise, df$p_osvote_precise, method = "spearman")
+```
 

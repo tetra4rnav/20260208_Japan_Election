@@ -1,0 +1,396 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\setmainfont{Times New Roman}
+\setmainjfont{Yu Mincho}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{Matt Sakamaki}
+\renewcommand{\headrulewidth}{0.4pt}
+\AtBeginDocument{\thispagestyle{fancy}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={2026年 衆議院議員選挙結果の分析},
+  pdfauthor={Matt Sakamaki - msakama2@jh.edu},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{2026年 衆議院議員選挙結果の分析}
+\author{Matt Sakamaki -
+\href{mailto:msakama2@jh.edu}{\nolinkurl{msakama2@jh.edu}}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(showtext)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: sysfonts
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: showtextdb
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(sysfonts)}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.2
+## v ggplot2   4.0.0     v tibble    3.3.0
+## v lubridate 1.9.4     v tidyr     1.3.1
+## v purrr     1.1.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\FunctionTok{showtext\_auto}\NormalTok{()}
+
+\NormalTok{df}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"partybalot.csv"}\NormalTok{)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   year balot_jimin balot_komei batot_ishin balot_yotousum seat_jimin seat_komei
+## 1 2014    25461449      765390           0       26226839        222          9
+## 2 2017    26500777      832453           0       27333230        215          8
+## 3 2021    27626236      872931           0       28499167        189          9
+## 4 2024    20867762      730401           0       21598163        132          4
+## 5 2026    27789183           0     4943331       32732514        249          0
+##   seat_ishin seat_yotousum seat_total  n_balot   n_voter p_vote n_osbalot
+## 1          0           231        295 54743087 103962784   0.53     19256
+## 2          0           223        289 56952674 106091229   0.54     21462
+## 3          0           198        289 58901616 105320523   0.56     19531
+## 4          0           136        289 55935743 103880749   0.54     17288
+## 5         20           269        289 58062807 103211224   0.56     28966
+##   n_osvoters p_osvote
+## 1     104677     0.18
+## 2     100405     0.21
+## 3      96664     0.20
+## 4      95472     0.18
+## 5     103380     0.28
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    5 obs. of  16 variables:
+##  $ year          : num  2014 2017 2021 2024 2026
+##  $ balot_jimin   : num  25461449 26500777 27626236 20867762 27789183
+##  $ balot_komei   : num  765390 832453 872931 730401 0
+##  $ batot_ishin   : num  0 0 0 0 4943331
+##  $ balot_yotousum: num  26226839 27333230 28499167 21598163 32732514
+##  $ seat_jimin    : num  222 215 189 132 249
+##  $ seat_komei    : num  9 8 9 4 0
+##  $ seat_ishin    : num  0 0 0 0 20
+##  $ seat_yotousum : num  231 223 198 136 269
+##  $ seat_total    : num  295 289 289 289 289
+##  $ n_balot       : num  54743087 56952674 58901616 55935743 58062807
+##  $ n_voter       : num  1.04e+08 1.06e+08 1.05e+08 1.04e+08 1.03e+08
+##  $ p_vote        : num  0.53 0.54 0.56 0.54 0.56
+##  $ n_osbalot     : num  19256 21462 19531 17288 28966
+##  $ n_osvoters    : num  104677 100405 96664 95472 103380
+##  $ p_osvote      : num  0.18 0.21 0.2 0.18 0.28
+\end{verbatim}
+
+\section{1}\label{section}
+
+\begin{quote}
+自民党得票率(小選挙区)と獲得議席数の関係
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{balot\_jimin =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(balot\_jimin)),}
+    \AttributeTok{n\_voter     =} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{as.character}\NormalTok{(n\_voter))}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{p\_jimin =}\NormalTok{ balot\_jimin }\SpecialCharTok{/}\NormalTok{ n\_balot,}
+    \AttributeTok{p\_seat\_jimin =}\NormalTok{ seat\_jimin }\SpecialCharTok{/}\NormalTok{ seat\_total}
+\NormalTok{  )}
+
+\NormalTok{plot1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}
+\NormalTok{  df,}
+  \FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x=}\NormalTok{p\_seat\_jimin,}
+    \AttributeTok{y=}\NormalTok{p\_jimin,}
+    \AttributeTok{label=}\NormalTok{year}
+\NormalTok{  )}
+\NormalTok{)}\SpecialCharTok{+}
+\FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{geom\_smooth}\NormalTok{(}
+  \AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+  \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{linewidth =} \FloatTok{0.7}\NormalTok{,}
+  \AttributeTok{fullrange =} \ConstantTok{TRUE}
+\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{geom\_text}\NormalTok{(}
+  \AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}
+  \AttributeTok{size =} \DecValTok{3}
+\NormalTok{) }\SpecialCharTok{+}
+  
+\FunctionTok{scale\_x\_continuous}\NormalTok{(}
+    \AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+    \AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent}
+\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{scale\_y\_continuous}\NormalTok{(}
+    \AttributeTok{limits =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+    \AttributeTok{labels =}\NormalTok{ scales}\SpecialCharTok{::}\NormalTok{percent}
+\NormalTok{) }\SpecialCharTok{+}
+  
+\FunctionTok{labs}\NormalTok{(}
+  \AttributeTok{title =} \StringTok{"衆院選 自民党得票率(小選挙区)と議席獲得率の関係"}\NormalTok{,}
+  \AttributeTok{x =} \StringTok{"自民党 議席獲得率（小選挙区）"}\NormalTok{,}
+  \AttributeTok{y =} \StringTok{"自民党 得票率 (得票数/投票数)"}\NormalTok{,}
+  \AttributeTok{caption =} \StringTok{"※ データ点が少ないため回帰は参考程度(外挿)"}
+\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{plot1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: The following aesthetics were dropped during statistical transformation: label.
+## i This can happen when ggplot fails to infer the correct grouping structure in
+##   the data.
+## i Did you forget to specify a `group` aesthetic or to convert a numerical
+##   variable into a factor?
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20260208_Japan_Election_files/figure-latex/unnamed-chunk-2-1.pdf}}
+
+\section{2.}\label{section-1}
+
+\begin{quote}
+投票率(全体)と在外投票率との関係
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{p\_vote\_precise =}\NormalTok{ n\_balot }\SpecialCharTok{/}\NormalTok{ n\_voter,}
+    \AttributeTok{p\_osvote\_precise =}\NormalTok{ n\_osbalot }\SpecialCharTok{/}\NormalTok{ n\_osvoters}
+\NormalTok{  )}
+
+\NormalTok{plot2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}
+\NormalTok{  df,}
+  \FunctionTok{aes}\NormalTok{(}
+    \AttributeTok{x=}\NormalTok{p\_vote\_precise,}
+    \AttributeTok{y=}\NormalTok{p\_osvote\_precise,}
+    \AttributeTok{label=}\NormalTok{year}
+\NormalTok{  )}
+\NormalTok{)}\SpecialCharTok{+}
+
+\FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{geom\_smooth}\NormalTok{(}
+  \AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+  \AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{linewidth =} \FloatTok{0.7}\NormalTok{,}
+  \AttributeTok{fullrange =} \ConstantTok{TRUE}
+\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{geom\_text}\NormalTok{(}
+  \AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}
+  \AttributeTok{size =} \DecValTok{3}
+\NormalTok{) }\SpecialCharTok{+}
+
+\FunctionTok{labs}\NormalTok{(}
+  \AttributeTok{title =} \StringTok{"衆院選 投票率(小選挙区・全体)と在外投票率との関係"}\NormalTok{,}
+  \AttributeTok{x =} \StringTok{"投票率"}\NormalTok{,}
+  \AttributeTok{y =} \StringTok{"在外投票率"}\NormalTok{,}
+  \AttributeTok{caption =} \StringTok{"※ データ点が少ないため回帰は参考程度(外挿)"}
+\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{)}
+
+\NormalTok{plot2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: The following aesthetics were dropped during statistical transformation: label.
+## i This can happen when ggplot fails to infer the correct grouping structure in
+##   the data.
+## i Did you forget to specify a `group` aesthetic or to convert a numerical
+##   variable into a factor?
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{20260208_Japan_Election_files/figure-latex/unnamed-chunk-3-1.pdf}}
+\#\# 検定
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#pearson}
+\FunctionTok{cor.test}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{p\_vote\_precise, df}\SpecialCharTok{$}\NormalTok{p\_osvote\_precise, }\AttributeTok{method =} \StringTok{"pearson"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  df$p_vote_precise and df$p_osvote_precise
+## t = 1.7212, df = 3, p-value = 0.1837
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.4691283  0.9785779
+## sample estimates:
+##      cor 
+## 0.704889
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#spearman}
+\FunctionTok{cor.test}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{p\_vote\_precise, df}\SpecialCharTok{$}\NormalTok{p\_osvote\_precise, }\AttributeTok{method =} \StringTok{"spearman"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Spearman's rank correlation rho
+## 
+## data:  df$p_vote_precise and df$p_osvote_precise
+## S = 10, p-value = 0.45
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+## rho 
+## 0.5
+\end{verbatim}
+
+\end{document}

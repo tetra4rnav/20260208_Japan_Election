@@ -3,7 +3,7 @@
     "path": "C:/Users/jh1cid/Dev/20260208_Japan_Election/20260208_Japan_Election.Rmd",
     "project_path": "20260208_Japan_Election.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "4194412841",
     "contents": "",
     "dirty": false,
     "created": 1770662020942.0,
@@ -12,15 +12,16 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "64,21",
-        "scrollLine": "66"
+        "cursorPosition": "0,0",
+        "scrollLine": "0",
+        "docOutlineVisible": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1770663915,
+    "lastKnownWriteTime": 1770671586,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1770663915039,
+    "last_content_update": 1770671586158,
     "read_only": false,
     "read_only_alternatives": []
 }
